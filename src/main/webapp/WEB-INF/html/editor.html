@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>在线文档</title>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
+<meta http-equiv="description" content="This is my page" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/jsoneditor/jsoneditor.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome.css?v=4.3.0}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css?v=2.2.0}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/metroStyle/metroStyle.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/js/layer/skin/layer.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/switch/switchery.css}" />
+<script type="text/javascript" th:src="@{/js/jquery-1.11.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jsoneditor/jsoneditor.js}"></script>
+<script type="text/javascript" th:src="@{/js/zTree/jquery.ztree.core-3.5.js}"></script>
+<script type="text/javascript" th:src="@{/js/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/js/comm.js}"></script>
+<script type="text/javascript" th:src="@{/js/switch/switchery.js}"></script>
+<script type="text/javascript" th:src="@{/js/view/editor.js}"></script>
+<script th:inline="javascript">
+var _base_url = [[@{/}]];
+var _tree_nodes = [[${groupList}]];
+var _isEncode = [[${isEncode}]];
+</script>
+</head>
+<body>
+	<div class="icip_content">
+		<div class="header">
+			返回报文加密：<input type="checkbox" class="js-switch" /> 
+		</div>
+		<div class="cust_editor">
+			<div class="part" id="jsonView"></div>
+			<div class="part button_area">
+				<div>
+					<button type="button" id="toText">&lt;&lt;&lt;&lt;</button>
+				</div>
+				<div>
+					<button type="button" id="toTree">&gt;&gt;&gt;&gt;</button>
+				</div>
+			</div>
+			<div class="part" id="jsoneditor"></div>
+		</div>
+		<div class="create">
+			<button class="bt-create" type="button">创建文档</button>
+		</div>
+		<div class="icip-table" id="icip_table">
+			<div class="os-tree">
+				<div style="padding:20px 0px 0px 20px;">
+					<span>版本号：</span>
+					<select id="s_version" style="width:100px;">
+					</select>
+				</div>
+				<ul id="osTree" class="ztree"></ul>
+			</div>
+			<div id="conetnt-table">
+				<div class="ibox-content" id="table-description">
+					<div class="row show-grid table-content">
+						<div class="col-md-2">
+							接口名称：<span id="interfaceName"></span>
+						</div>
+						<div class="col-md-2">
+							所属系统：<span id="group"></span>
+						</div>
+						<div class="col-md-2">
+							版本号：<span id="it_version"></span>
+						</div>
+						<div class="col-md-5">
+							描述：<span id="it_desc"></span>
+						</div>
+						<div class="col-md-1">
+							<a href="javascript:void(0);" onclick="showResponseInput();">查看返回报文</a>
+						</div>
+					</div>
+				</div>
+				<div class="ibox-content" id="table-request">
+					<div class="jiacu">请求(request)：</div>
+					<div class="row show-grid table-header">
+						<div class="col-md-2">名称</div>
+						<div class="col-md-1">类型</div>
+						<div class="col-md-2">是否可为空</div>
+						<div class="col-md-2">描述</div>
+						<div class="col-md-2">约束</div>
+					</div>
+				</div>
+				<div class="ibox-content" id="table-response">
+					<div class="jiacu">返回(response)：</div>
+					<div class="row show-grid table-header">
+						<div class="col-md-2">名称</div>
+						<div class="col-md-1">类型</div>
+						<div class="col-md-2">是否可为空</div>
+						<div class="col-md-2">描述</div>
+						<div class="col-md-2">约束</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

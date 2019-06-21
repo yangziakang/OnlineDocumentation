@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>返回报文设置</title>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
+<meta http-equiv="description" content="This is my page" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/jsoneditor/jsoneditor.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome.css?v=4.3.0}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css?v=2.2.0}" />
+<link rel="stylesheet" type="text/css" th:href="@{/js/layer/skin/layer.css}" />
+<script type="text/javascript" th:src="@{/js/jquery-1.11.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bmsAjax.js}"></script>
+<script type="text/javascript" th:src="@{/js/jsoneditor/jsoneditor.js}"></script>
+<script type="text/javascript" th:src="@{/js/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/js/comm.js}"></script>
+<script th:inline="javascript">
+$(function() {
+	var _base_url = [[@{/}]];
+	var _group = [[${group}]];
+	var _interfaceName = [[${interfaceName}]];
+	var _description = [[${description}]];
+	var _version = [[${version}]];
+	var _jsonStr = [[${jsonStr}]];
+	
+	var viewer = document.getElementById('jsonView');
+	var options = {
+		"mode" : "text"
+	};
+	var _json_viewer = new JSONEditor(viewer, options);
+	_json_viewer.setText(JSON.stringify(JSON.parse(_jsonStr), null, 2));
+	
+	$("#save").click(function(){
+		var tempStr = _json_viewer.getText();
+		try {
+			JSON.stringify(JSON.parse(_jsonStr), null, 2)
+		} catch(e) {
+			_alert(e.message);
+			return;
+		}
+		$.ajax({
+  		url : _base_url + "createResponse.do",
+  		data : {
+  			jsonStr : _json_viewer.getText(),
+  			version : _version,
+  			group : _group,
+  			interfaceName : _interfaceName,
+  			description : _description
+  		},
+  		success : function(data) {
+  			if (data.code == "1") {
+  				_alert("创建成功");
+  			} else {
+  				_alert(data.result);
+  			}
+  		}
+  	});
+	});
+	
+});
+</script>
+</head>
+<body>
+	<div class="icip_content">
+		<div class="cust_editor">
+			<div class="part" id="jsonView" style="width:810px;"></div>
+		</div>
+		<div class="create">
+			<button id="save" style="width:80px;">保存</button>
+		</div>
+	</div>
+</body>
+</html>
