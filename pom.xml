@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<json.lib.version>2.4</json.lib.version>
 		<fast.json.version>1.2.4</fast.json.version>
-		<jakson.version>2.6.1</jakson.version>
+		<jakson.version>2.12.1</jakson.version>
 	</properties>
 
 	<dependencies>
